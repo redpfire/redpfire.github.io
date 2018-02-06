@@ -9,6 +9,410 @@
 </br>
 That is basically it. Pika's own CPU is based on piks so some time since now there will be available source code for an emulator for this architecture. - <i>Stay tuned</i>
 </br></br>
-
+Architecture: piks little endian
+</br>
+Instruction set:
+</br></br>
+<table>
+        <tr>
+                <th>Instruction</th>
+                <th>Opcode</th>
+                <th>Size</th>
+                <th>RS</th>
+                <th>Job</th>
+        </tr>
+        <tr>
+                <td>HLT</td>
+                <td>00</td>
+                <td>1</td>
+                <td style='text-align:center;'>-</td>
+                <td>Halts the CPU</td>
+        </tr>
+        <tr>
+                <td>L R1, $</td>
+                <td>01 R1 $</td>
+                <td>3-5</td>
+                <td style='text-align:center;'>-</td>
+                <td>Loads a value to the register</td>
+        </tr>
+        <tr>
+                <td>ADD R1, R2</td>
+                <td>02 R1 R2</td>
+                <td>3</td>
+                <td>ACC</td>
+                <td>Adds registers R1 to the R2</td>
+        </tr>
+        <tr>
+                <td>ADD R1, $</td>
+                <td>03 R1 $</td>
+                <td>3-5</td>
+                <td>ACC</td>
+                <td>Adds a value to the R1 register</td>
+        </tr>
+        <tr>
+                <td>SUB R1, R2</td>
+                <td>04 R1 R2</td>
+                <td>3</td>
+                <td>ACC</td>
+                <td>Subtracts registers R2 from R1</td>
+        </tr>
+        <tr>
+                <td>SUB R1, $</td> <!-- INS -->
+                <td>05 R1 $</td> <!-- OPC -->
+                <td>3-5</td> <!-- SIZE -->
+                <td>ACC</td> <!-- RES -->
+                <td>Subtracts $ from R1</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>AND R1, R2</td> <!-- INS -->
+                <td>06 R1 R2</td> <!-- OPC -->
+                <td>3</td> <!-- SIZE -->
+                <td>ACC</td> <!-- RES -->
+                <td>Bitwise AND on R1 with R2</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>AND R1, $</td> <!-- INS -->
+                <td>07 R1 $</td> <!-- OPC -->
+                <td>3-5</td> <!-- SIZE -->
+                <td>ACC</td> <!-- RES -->
+                <td>Bitwise AND on R1 with $</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>OR R1, R2</td> <!-- INS -->
+                <td>08 R1 R2</td> <!-- OPC -->
+                <td>3</td> <!-- SIZE -->
+                <td>ACC</td> <!-- RES -->
+                <td>Bitwise OR on R1 with R2</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>OR R1, $</td> <!-- INS -->
+                <td>09 R1 $</td> <!-- OPC -->
+                <td>3-5</td> <!-- SIZE -->
+                <td>ACC</td> <!-- RES -->
+                <td>Bitwise OR on R1 with $</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>XOR R1, R2</td> <!-- INS -->
+                <td>0A R1 R2</td> <!-- OPC -->
+                <td>3</td> <!-- SIZE -->
+                <td>ACC</td> <!-- RES -->
+                <td>Bitwise XOR on R1 with R2</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>XOR R1, $</td> <!-- INS -->
+                <td>0B R1 $</td> <!-- OPC -->
+                <td>3-5</td> <!-- SIZE -->
+                <td>ACC</td> <!-- RES -->
+                <td>Bitwise XOR on R1 with $</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>NOT R1</td> <!-- INS -->
+                <td>0C R1</td> <!-- OPC -->
+                <td>2</td> <!-- SIZE -->
+                <td>ACC</td> <!-- RES -->
+                <td>Bitwise NOT on R1</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>CP R1</td> <!-- INS -->
+                <td>0D R1</td> <!-- OPC -->
+                <td>2</td> <!-- SIZE -->
+                <td>F</td> <!-- RES -->
+                <td>Compares ACC to R1</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>SA R1</td> <!-- INS -->
+                <td>0E R1</td> <!-- OPC -->
+                <td>2</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Sets current ACC</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>CL R1</td> <!-- INS -->
+                <td>0F R1</td> <!-- OPC -->
+                <td>2</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Calls R1</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>CL $</td> <!-- INS -->
+                <td>10 $</td> <!-- OPC -->
+                <td>2-4</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Calls $</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>ECL R1</td> <!-- INS -->
+                <td>11 R1</td> <!-- OPC -->
+                <td>2</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Calls R1 when zero flag is set</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>ECL $</td> <!-- INS -->
+                <td>12 $</td> <!-- OPC -->
+                <td>2-4</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Calls $ when zero flag is set</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>GCL R1</td> <!-- INS -->
+                <td>13 R1</td> <!-- OPC -->
+                <td>2</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Calls R1 when only gt flag is set</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>GCL $</td> <!-- INS -->
+                <td>14 $</td> <!-- OPC -->
+                <td>2-4</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Calls $ when gt flag is set</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>BCL R1</td> <!-- INS -->
+                <td>15 R1</td> <!-- OPC -->
+                <td>2</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Calls R1 when zero and gt flags are not set</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>BCL $</td> <!-- INS -->
+                <td>16 $</td> <!-- OPC -->
+                <td>2-4</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Calls $ when zero and gt flags are not set</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td style='text-align:center;'>-</td> <!-- INS -->
+                <td>17</td> <!-- OPC -->
+                <td style='text-align:center;'>-</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Reserved</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>JP $</td> <!-- INS -->
+                <td>18 $</td> <!-- OPC -->
+                <td>2-4</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Jumps to $</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>EJP R1</td> <!-- INS -->
+                <td>19 R1</td> <!-- OPC -->
+                <td>2</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Jumps to R1 when zero flag is set</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>EJP $</td> <!-- INS -->
+                <td>1A $</td> <!-- OPC -->
+                <td>2-4</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Jumps to $ when zero flag is set</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>GJP R1</td> <!-- INS -->
+                <td>1B R1</td> <!-- OPC -->
+                <td>2</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Jumps to R1 when only gt flag is set</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>GJP $</td> <!-- INS -->
+                <td>1C $</td> <!-- OPC -->
+                <td>2-4</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Jumps to $ when only gt flag is set</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>BJP R1</td> <!-- INS -->
+                <td>1D R1</td> <!-- OPC -->
+                <td>2</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Jumps to R1 when zero and gt flags are set</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>BJP $</td> <!-- INS -->
+                <td>1E $</td> <!-- OPC -->
+                <td>2-4</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Jumps to $ when zero and gt flags are set</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>JP R1</td> <!-- INS -->
+                <td>1F R1</td> <!-- OPC -->
+                <td>2</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Jumps to R1</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>L [$], R1</td> <!-- INS -->
+                <td>20 R1 $</td> <!-- OPC -->
+                <td>3-5</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Loads R1 into &$</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>IN R1, $</td> <!-- INS -->
+                <td>21 R1 $</td> <!-- OPC -->
+                <td>3-5</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Load one byte into R1 from I/O $</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>OUT $, R1</td> <!-- INS -->
+                <td>22 R1 $</td> <!-- OPC -->
+                <td>3-5</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Load R1 into I/O $</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>DIN R1, $</td> <!-- INS -->
+                <td>23 R1 $</td> <!-- OPC -->
+                <td>3-5</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Double load (16 bits) into R1 from I/O $</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>DOU $, R1</td> <!-- INS -->
+                <td>24 R1 $</td> <!-- OPC -->
+                <td>3-5</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Double load (16 bits) R1 into I/O $</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>LDA R1, $</td> <!-- INS -->
+                <td>25 R1 $</td> <!-- OPC -->
+                <td>3-5</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Load a byte from $ into R1</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>CP $</td> <!-- INS -->
+                <td>26 $</td> <!-- OPC -->
+                <td>2-4</td> <!-- SIZE -->
+                <td>F</td> <!-- RES -->
+                <td>Compare ACC to $</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>IN R1, R2</td> <!-- INS -->
+                <td>27 R1 R2</td> <!-- OPC -->
+                <td>3</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Load a byte into R1 from I/O R2</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>OUT R1, R2</td> <!-- INS -->
+                <td>28 R1 R2</td> <!-- OPC -->
+                <td>3</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Load a byte from R2 into I/O R1</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>DIN R1, R2</td> <!-- INS -->
+                <td>29 R1 R2</td> <!-- OPC -->
+                <td>3</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Double load (16 bits) into R1 from I/O R2</td> <!-- DSC -->
+        </tr>
+        <tr>
+                <td>DOU R1, R2</td> <!-- INS -->
+                <td>2A R1 R2</td> <!-- OPC -->
+                <td>3</td> <!-- SIZE -->
+                <td style='text-align:center;'>-</td> <!-- RES -->
+                <td>Double load (16 bits) from R2 into I/O R1</td> <!-- DSC -->
+        </tr>
+</table>
+</br>
+Registers:
+</br></br>
+<table>
+        <tr>
+                <th>ACC</th>
+                <th>R</th>
+                <th>Hex</th>
+                <th>Bits size</th>
+        </tr>
+        <tr>
+                <td style='text-align:center;'>y</td>
+                <td style='text-align:center;'>A</td>
+                <td style='text-align:center;'>01</td>
+                <td style='text-align:center;'>16</td>
+        </tr>
+        <tr>
+                <td style='text-align:center;'>y</td>
+                <td style='text-align:center;'>C</td>
+                <td style='text-align:center;'>02</td>
+                <td style='text-align:center;'>8</td>
+        </tr>
+        <tr>
+                <td style='text-align:center;'>-</td>
+                <td style='text-align:center;'>B</td>
+                <td style='text-align:center;'>03</td>
+                <td style='text-align:center;'>16</td>
+        </tr>
+        <tr>
+                <td style='text-align:center;'>-</td>
+                <td style='text-align:center;'>AB</td>
+                <td style='text-align:center;'>04</td>
+                <td style='text-align:center;'>32</td>
+        </tr>
+        <tr>
+                <td style='text-align:center;'>-</td>
+                <td style='text-align:center;'>AC</td>
+                <td style='text-align:center;'>05</td>
+                <td style='text-align:center;'>32</td>
+        </tr>
+        <tr>
+                <td style='text-align:center;'>-</td>
+                <td style='text-align:center;'>BC</td>
+                <td style='text-align:center;'>06</td>
+                <td style='text-align:center;'>32</td>
+        </tr>
+        <tr>
+                <td style='text-align:center;'>FR</td>
+                <td style='text-align:center;'>F</td>
+                <td style='text-align:center;'>07</td>
+                <td style='text-align:center;'>8</td>
+        </tr>
+        <tr>
+                <td style='text-align:center;'>-</td>
+                <td style='text-align:center;'>PC</td>
+                <td style='text-align:center;'>08</td>
+                <td style='text-align:center;'>32</td>
+        </tr>
+</table>
+</br>
+Flags:
+</br></br>
+<table>
+        <tr>
+                <th>Flag</th>
+                <th>Bits</th>
+        </tr>
+        <tr>
+                <td>Carry</td>
+                <td>xxx1</td>
+        </tr>
+        <tr>
+                <td>GT</td>
+                <td>xx1x</td>
+        </tr>
+        <tr>
+                <td>Zero</td>
+                <td>x1xx</td>
+        </tr>
+</table>
+</br>
+Legend:
+</br></br>
+RS - result storage ( for ex. in an accumulator )</br>
+FR - flag register</br>
+R  - a register</br>
+R1 - first register in the instruction</br>
+R2 - second register in the instruction</br>
+ACC- accumulator register</br>
+$  - a value which is 8 to 32 bits long ( depends on the register you choose ) and in little endian order</br>
+</br>
 </body>
 </html>
