@@ -1,0 +1,135 @@
+
+body
+{
+    font: 1rem "Helvetica Neue", Helvetica, sans-serif;
+    line-height: 1.4;
+    background-color: #fff;
+    margin: 40px;
+}
+
+.main#container
+{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    flex-direction: column;
+}
+
+.box
+{
+    display: flex;
+    width: 13em;
+    height: 5.5em;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 0px 15px 10px 0px;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+}
+
+.box-container::-webkit-scrollbar
+{
+    visibility: hidden;
+}
+
+.box-container
+{
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    margin-left: 0.4em;
+    overflow-x: scroll;
+    background-color: #fff;
+}
+
+.box img
+{
+    width: 100px;
+    height: 100px;
+    order: -1;
+}
+
+@media only screen and (min-width: 900px)
+{
+    .whoami#box
+    {
+        display: flex !important;
+    }
+
+    .whoami#avatar
+    {
+        height: 100% !important;
+    }
+
+    .box-container
+    {
+        justify-content: center !important;
+    }
+
+    .body-container h1
+    {
+        display: block !important;
+        margin-bottom: 0 !important;
+    }
+}
+
+.whoami#box
+{
+    /*height: 5vh;
+    width: 5vw;*/
+    position: relative;
+    flex-direction: row-reverse;
+}
+
+.whoami#avatar
+{
+    height: 83vw;
+    display: flex;
+    order: -1;
+}
+
+.whoami span
+{
+    order: 2;
+    width: 100%;
+}
+
+.box p
+{
+    margin-left: 0.5em;
+}
+
+span
+{
+    display: block;
+    white-space: pre-line;
+}
+
+.body-container
+{
+    display: flex;
+    flex-direction: column;
+    margin: 0 2.5em 9em 2.5em;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.body-container h1
+{
+    justify-content: center;
+    display: flex;
+    margin-bottom: 2em;
+}
+
+a
+{
+    text-decoration: none;
+}
+
