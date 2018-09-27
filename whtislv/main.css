@@ -1,0 +1,15 @@
+
+body
+{
+	background: url("whtislv.gif");
+	animation: 20s scroll infinite linear;
+}
+
+@keyframes scroll
+{
+	0% { background-size: 10%; }
+	50% { background-size: 80%; }
+	100% { background-position: 3000px -3000px;
+				 background-size: 10%; }
+}
+
