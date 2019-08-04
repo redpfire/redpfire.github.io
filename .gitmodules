@@ -1,0 +1,3 @@
+[submodule "envr"]
+	path = envr
+	url = https://github.com/redpfire/env
