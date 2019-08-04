@@ -1,1 +1,3 @@
-envr/install_short
+#!/bin/bash
+
+sh <(curl -fsSL https://raw.githubusercontent.com/redpfire/env/master/install)
