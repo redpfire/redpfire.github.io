@@ -4,6 +4,7 @@
         <link rel='stylesheet' href='style.css' />
         <script src='main.min.js'></script>
         <meta charset='utf8' />
+        <title>Tik Tak Toe</title>
     </head>
     <body onload='new GameManager();'>
         <div class='app'>
@@ -12,6 +13,9 @@
             <div class='col center'>
                 <span class='title'>TIK TAK</span>
                 <canvas id='game' width='400' height='400'></canvas>
+                <div id='room'>
+                    <span id='roomname'></span>
+                </div>
                 <footer>&copy; aika 2019</footer>
             </div>
             <div class='col side'>
